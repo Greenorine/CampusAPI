@@ -1,0 +1,12 @@
+F:\Прога\test\CampusAPI\CampusAPI.Db\bin\Debug\net6.0\CampusAPI.Db.deps.json
+F:\Прога\test\CampusAPI\CampusAPI.Db\bin\Debug\net6.0\CampusAPI.Db.dll
+F:\Прога\test\CampusAPI\CampusAPI.Db\bin\Debug\net6.0\ref\CampusAPI.Db.dll
+F:\Прога\test\CampusAPI\CampusAPI.Db\bin\Debug\net6.0\CampusAPI.Db.pdb
+F:\Прога\test\CampusAPI\CampusAPI.Db\obj\Debug\net6.0\CampusAPI.Db.csproj.AssemblyReference.cache
+F:\Прога\test\CampusAPI\CampusAPI.Db\obj\Debug\net6.0\CampusAPI.Db.GeneratedMSBuildEditorConfig.editorconfig
+F:\Прога\test\CampusAPI\CampusAPI.Db\obj\Debug\net6.0\CampusAPI.Db.AssemblyInfoInputs.cache
+F:\Прога\test\CampusAPI\CampusAPI.Db\obj\Debug\net6.0\CampusAPI.Db.AssemblyInfo.cs
+F:\Прога\test\CampusAPI\CampusAPI.Db\obj\Debug\net6.0\CampusAPI.Db.csproj.CoreCompileInputs.cache
+F:\Прога\test\CampusAPI\CampusAPI.Db\obj\Debug\net6.0\CampusAPI.Db.dll
+F:\Прога\test\CampusAPI\CampusAPI.Db\obj\Debug\net6.0\ref\CampusAPI.Db.dll
+F:\Прога\test\CampusAPI\CampusAPI.Db\obj\Debug\net6.0\CampusAPI.Db.pdb
