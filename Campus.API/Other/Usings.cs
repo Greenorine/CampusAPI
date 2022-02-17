@@ -1,0 +1,10 @@
+global using System;
+global using System.Linq;
+global using System.Reflection;
+global using MediatR;
+global using Autofac;
+global using Autofac.Extensions.DependencyInjection;
+global using Campus.Db;
+global using Campus.Model.Handlers;
+global using Campus.Model.Utils;
+global using Microsoft.EntityFrameworkCore;

@@ -1,16 +1,2 @@
 
-.idea/
-
-bin/
-
-obj/
-
-*.targets
-
-*.props
-
-*.info
-
-*.sentinel
-
-*.cache
+.idea/.idea.Campus/.idea/
