@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Campus.Model.Handlers;
 
-public record GetAllEntities<T> : IRequest<T>, IRequest<List<T>> where T : class, IBaseEntity;
+public record GetAllEntities<T> : IRequest<List<T>> where T : class, IBaseEntity;
 
 public class GetAllEntitiesHandler<T> : IRequestHandler<GetAllEntities<T>, List<T>> where T : class, IBaseEntity
 {

@@ -17,9 +17,21 @@ public class TestController : ControllerBase
         this.mediator = mediator;
     }
 
-    [HttpGet(Name = "test")]
-    public async Task<IActionResult> Get()
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] User user)
     {
-        return Ok(await mediator.Send(new GetAllEntities<User>()));
+        return Ok(await mediator.Send(new UpsertEntity<User>(user)));
+    }
+    
+    [HttpGet("get1")]
+    public async Task<IActionResult> Get1(Guid id)
+    {
+        return Ok(await mediator.Send(new GetEntityById<User>(id)));
+    }
+    
+    [HttpGet("Get2")]
+    public async Task<IActionResult> Get2(Guid id)
+    {
+        return Ok(await mediator.Send(new GetEntityById<User>(id)));
     }
 }
