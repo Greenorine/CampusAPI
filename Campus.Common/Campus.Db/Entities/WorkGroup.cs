@@ -9,7 +9,6 @@ namespace Campus.Db.Entities
 {
     public class WorkGroup : IEntity
     {
-        Guid IBaseEntity.Id { get; set; }
         public TeacherInfo Teacher { get; set; }
 
         public StudentInfo Elder { get; set; }
@@ -18,6 +17,6 @@ namespace Campus.Db.Entities
         public DateTime CreatedOn { get; set; }
         public DateTime ModifiedOn { get; set; }
         public bool IsDeleted { get; set; }
-        
+        public Guid Id { get; set; }
     }
 }
