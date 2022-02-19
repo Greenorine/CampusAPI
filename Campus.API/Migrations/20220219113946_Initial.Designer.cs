@@ -3,6 +3,7 @@ using System;
 using Campus.Db;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Campus.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220219113946_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,45 +50,6 @@ namespace Campus.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AcademicGroup");
-                });
-
-            modelBuilder.Entity("Campus.Db.Entities.Activity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<TimeSpan>("Duration")
-                        .HasColumnType("interval");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("ModifiedBy")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("ModifiedOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("StartsAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<Guid>("WorkGroupId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WorkGroupId");
-
-                    b.ToTable("Activities");
                 });
 
             modelBuilder.Entity("Campus.Db.Entities.StudentInfo", b =>
@@ -229,17 +192,6 @@ namespace Campus.API.Migrations
                     b.HasIndex("WorkGroupsId");
 
                     b.ToTable("StudentInfoWorkGroup");
-                });
-
-            modelBuilder.Entity("Campus.Db.Entities.Activity", b =>
-                {
-                    b.HasOne("Campus.Db.Entities.WorkGroup", "WorkGroup")
-                        .WithMany()
-                        .HasForeignKey("WorkGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("WorkGroup");
                 });
 
             modelBuilder.Entity("Campus.Db.Entities.StudentInfo", b =>

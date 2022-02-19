@@ -46,6 +46,7 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<User> Users { get; set; }
-    public DbSet<User> StudentInfo { get; set; }
-    public DbSet<User> TeacherInfo { get; set; }
+    public DbSet<StudentInfo> StudentInfo { get; set; }
+    public DbSet<TeacherInfo> TeacherInfo { get; set; }
+    public DbSet<Activity> Activities { get; set; }
 }
