@@ -4,13 +4,13 @@ using MediatR;
 
 namespace Campus.Model.Handlers;
 
-public record GetEntityById<T>(Guid Id) : IRequest<T> where T : class, IBaseEntity;
+public record SaveEntityById<T>(Guid Id) : IRequest<T> where T : class, IBaseEntity;
 
-public class GetEntityByIdHandler<T> : IRequestHandler<GetEntityById<T>, T> where T : class, IBaseEntity
+public class SaveEntityByHandler<T> : IRequestHandler<GetEntityById<T>, T> where T : class, IBaseEntity
 {
     private AppDbContext context;
     
-    public GetEntityByIdHandler(AppDbContext context)
+    public SaveEntityByHandler(AppDbContext context)
     {
         this.context = context;
     }

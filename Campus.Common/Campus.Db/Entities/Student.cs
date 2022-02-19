@@ -2,9 +2,9 @@ using Campus.Db.Interfaces;
 
 namespace Campus.Db.Entities;
 
-public class Client : IEntity
+public class Student : IEntity
 {
-    public string? Name { get; set; }
+    public User User { get; set; }
     public Guid? Id { get; set; }
     public DateTime? CreatedOn { get; set; }
     public DateTime? ModifiedOn { get; set; }

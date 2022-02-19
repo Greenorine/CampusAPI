@@ -45,5 +45,5 @@ public class AppDbContext : DbContext
         return await base.SaveChangesAsync(cancellationToken);
     }
 
-    public DbSet<Client> Clients { get; set; }
+    public DbSet<User> Clients { get; set; }
 }
