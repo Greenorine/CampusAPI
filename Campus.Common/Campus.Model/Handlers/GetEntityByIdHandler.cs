@@ -17,6 +17,6 @@ public class GetEntityByIdHandler<T> : IRequestHandler<GetEntityById<T>, T> wher
     
     public async Task<T> Handle(GetEntityById<T> request, CancellationToken cancellationToken)
     {
-        return await context.FindAsync<T>(request.Id);
+        return await context.FindAsync<T>(request.Id, cancellationToken);
     }
 }

@@ -12,5 +12,6 @@ namespace Campus.Db.Entities
         public DateTime ModifiedOn { get; set; }
         public bool IsDeleted { get; set; }
 
+        public Guid Id { get; set; }
     }
 }
