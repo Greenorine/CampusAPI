@@ -5,6 +5,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("kampus_connection") ?? string.Empty,
         b => b.MigrationsAssembly(typeof(Program).GetTypeInfo().Assembly.GetName().Name));
+    options.UseLazyLoadingProxies();
 });
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory(builder =>
 {

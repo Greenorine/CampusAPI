@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Campus.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220219113946_Initial")]
+    [Migration("20220219150910_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,45 @@ namespace Campus.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AcademicGroup");
+                });
+
+            modelBuilder.Entity("Campus.Db.Entities.Activity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<TimeSpan>("Duration")
+                        .HasColumnType("interval");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("ModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("StartsAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid>("WorkGroupId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WorkGroupId");
+
+                    b.ToTable("Activities");
                 });
 
             modelBuilder.Entity("Campus.Db.Entities.StudentInfo", b =>
@@ -194,10 +233,21 @@ namespace Campus.API.Migrations
                     b.ToTable("StudentInfoWorkGroup");
                 });
 
+            modelBuilder.Entity("Campus.Db.Entities.Activity", b =>
+                {
+                    b.HasOne("Campus.Db.Entities.WorkGroup", "WorkGroup")
+                        .WithMany()
+                        .HasForeignKey("WorkGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("WorkGroup");
+                });
+
             modelBuilder.Entity("Campus.Db.Entities.StudentInfo", b =>
                 {
                     b.HasOne("Campus.Db.Entities.AcademicGroup", "AcademicGroup")
-                        .WithMany()
+                        .WithMany("Students")
                         .HasForeignKey("AcademicGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -248,6 +298,11 @@ namespace Campus.API.Migrations
                         .HasForeignKey("WorkGroupsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Campus.Db.Entities.AcademicGroup", b =>
+                {
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("Campus.Db.Entities.TeacherInfo", b =>

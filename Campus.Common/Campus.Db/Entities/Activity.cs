@@ -1,5 +1,4 @@
 ﻿using Campus.Db.Interfaces;
-using Campus.Db.Models;
 
 namespace Campus.Db.Entities
 {
@@ -11,7 +10,7 @@ namespace Campus.Db.Entities
         public DateTime CreatedOn { get; set; }
         public DateTime ModifiedOn { get; set; }
         public bool IsDeleted { get; set; }
-        public WorkGroup WorkGroup { get; set; }
+        public virtual WorkGroup WorkGroup { get; set; }
 
         public DateTime StartsAt { get; set; }
         public TimeSpan Duration { get; set; }

@@ -245,7 +245,7 @@ namespace Campus.API.Migrations
             modelBuilder.Entity("Campus.Db.Entities.StudentInfo", b =>
                 {
                     b.HasOne("Campus.Db.Entities.AcademicGroup", "AcademicGroup")
-                        .WithMany()
+                        .WithMany("Students")
                         .HasForeignKey("AcademicGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -296,6 +296,11 @@ namespace Campus.API.Migrations
                         .HasForeignKey("WorkGroupsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Campus.Db.Entities.AcademicGroup", b =>
+                {
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("Campus.Db.Entities.TeacherInfo", b =>
