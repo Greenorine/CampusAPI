@@ -16,5 +16,6 @@ namespace Campus.Db.Entities
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
         public bool IsDeleted { get; set; }
+        public List<WorkGroup> WorkGroups { get; set; }
     }
 }

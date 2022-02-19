@@ -3,7 +3,7 @@ using Campus.Db.Models;
 
 namespace Campus.Db.Entities
 {
-    public class Schedule : IEntity
+    public class Activity : IEntity
     {
         public Guid Id { get; set; }
         public string CreatedBy { get; set; }
@@ -13,7 +13,7 @@ namespace Campus.Db.Entities
         public bool IsDeleted { get; set; }
         public WorkGroup WorkGroup { get; set; }
 
-        public WeekTime StartTime { get; set; }
-        public WeekTime EndTime { get; set; }
+        public DateTime StartsAt { get; set; }
+        public TimeSpan Duration { get; set; }
     }
 }

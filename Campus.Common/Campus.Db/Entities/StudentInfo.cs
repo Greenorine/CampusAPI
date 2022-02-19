@@ -11,5 +11,7 @@ public class StudentInfo : IEntity
     public string CreatedBy { get; set; }
     public string ModifiedBy { get; set; }
     public bool IsDeleted { get; set; }
-    public AcademicGroup AGroup { get; set; }
+    public AcademicGroup AcademicGroup { get; set; }
+
+    public List<WorkGroup> WorkGroups { get; set; }
 }

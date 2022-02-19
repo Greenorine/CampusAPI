@@ -4,7 +4,7 @@ namespace Campus.Db.Entities
 {
     public class AcademicGroup : IEntity
     {
-        Guid IBaseEntity.Id { get; set; }
+        public Guid Id { get; set; }
         public StudentInfo Elder { get; set; }
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
