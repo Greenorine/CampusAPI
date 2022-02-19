@@ -15,26 +15,32 @@ public class AcademicGroupController : ControllerBase
         this.mediator = mediator;
     }
 
-    [HttpPost("get_group/{id}")]
-    public async Task<IActionResult> Getgroup(Guid id)
+    [HttpGet("get_group/{id}")]
+    public async Task<IActionResult> GetGroup(Guid id)
     {
         return Ok(await mediator.Send(new GetEntityById<AcademicGroup>(id)));
     }
 
+    [HttpGet("get_all_group")]
+    public async Task<IActionResult> GetAllGroup()
+    {
+        return Ok(await mediator.Send(new GetAllEntities<AcademicGroup>()));
+    }
+
     [HttpPost("add_group")]
-    public async Task<IActionResult> Addgroup([FromBody] AcademicGroup group)
+    public async Task<IActionResult> AddGroup([FromBody] AcademicGroup group)
     {
         return Ok(await mediator.Send(new UpsertEntity<AcademicGroup>(group)));
     }
 
-    [HttpGet("remove_group/{id}")]
-    public async Task<IActionResult> Removegroup(Guid id)
+    [HttpDelete("remove_group/{id}")]
+    public async Task<IActionResult> RemoveGroup(Guid id)
     {
         return Ok(await mediator.Send(new DeleteEntityById<AcademicGroup>(id)));
     }
 
-    [HttpPost("update_group")]
-    public async Task<IActionResult> Updategroup([FromBody] AcademicGroup group)
+    [HttpPut("update_group")]
+    public async Task<IActionResult> UpdateGroup([FromBody] AcademicGroup group)
     {
         return Ok(await mediator.Send(new UpdateEntity<AcademicGroup>(group)));
     }

@@ -15,10 +15,16 @@ public class StudentInfoController : ControllerBase
         this.mediator = mediator;
     }
     
-    [HttpPost("get_info/{id}")]
+    [HttpGet("get_info/{id}")]
     public async Task<IActionResult> GetInfo(Guid id)
     {
         return Ok(await mediator.Send(new GetEntityById<StudentInfo>(id)));
+    }
+
+    [HttpGet("get_all_info")]
+    public async Task<IActionResult> GetAllGroup()
+    {
+        return Ok(await mediator.Send(new GetAllEntities<StudentInfo>()));
     }
 
     [HttpPost("add_info")]
@@ -27,13 +33,13 @@ public class StudentInfoController : ControllerBase
         return Ok(await mediator.Send(new UpsertEntity<StudentInfo>(info)));
     }
     
-    [HttpGet("remove_info/{id}")]
+    [HttpDelete("remove_info/{id}")]
     public async Task<IActionResult> RemoveInfo(Guid id)
     {
         return Ok(await mediator.Send(new DeleteEntityById<StudentInfo>(id)));
     }
     
-    [HttpPost("update_info")]
+    [HttpPut("update_info")]
     public async Task<IActionResult> UpdateInfo([FromBody] StudentInfo info)
     {
         return Ok(await mediator.Send(new UpdateEntity<StudentInfo>(info)));

@@ -15,10 +15,16 @@ public class UserController : ControllerBase
         this.mediator = mediator;
     }
     
-    [HttpPost("get_user/{id}")]
+    [HttpGet("get_user/{id}")]
     public async Task<IActionResult> GetUser(Guid id)
     {
         return Ok(await mediator.Send(new GetEntityById<User>(id)));
+    }
+
+    [HttpGet("get_all_user")]
+    public async Task<IActionResult> GetAllGroup()
+    {
+        return Ok(await mediator.Send(new GetAllEntities<User>()));
     }
 
     [HttpPost("add_user")]
@@ -27,13 +33,13 @@ public class UserController : ControllerBase
         return Ok(await mediator.Send(new UpsertEntity<User>(user)));
     }
     
-    [HttpGet("remove_user/{id}")]
+    [HttpDelete("remove_user/{id}")]
     public async Task<IActionResult> RemoveUser(Guid id)
     {
         return Ok(await mediator.Send(new DeleteEntityById<User>(id)));
     }
     
-    [HttpPost("update_user")]
+    [HttpPut("update_user")]
     public async Task<IActionResult> UpdateUser([FromBody] User user)
     {
         return Ok(await mediator.Send(new UpdateEntity<User>(user)));
