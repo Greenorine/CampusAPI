@@ -22,33 +22,27 @@ namespace Campus.API.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Campus.Db.Entities.Client", b =>
+            modelBuilder.Entity("Campus.Db.Entities.User", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("CreatedBy")
+                    b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<DateTime?>("CreatedOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<bool?>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Roles")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clients");
+                    b.ToTable("User");
                 });
 #pragma warning restore 612, 618
         }

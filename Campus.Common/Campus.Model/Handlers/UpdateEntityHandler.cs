@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Campus.Model.Handlers;
 
-public record UpdateEntity<T>(T Entity) : IRequest<T>, IRequest<bool> where T : class, IBaseEntity;
+public record UpdateEntity<T>(T Entity) : IRequest<bool> where T : class, IBaseEntity;
 
 public class UpdateEntityHandler<T> : IRequestHandler<UpdateEntity<T>, bool> where T : class, IBaseEntity
 {

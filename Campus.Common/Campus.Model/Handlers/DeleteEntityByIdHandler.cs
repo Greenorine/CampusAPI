@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Campus.Model.Handlers;
 
-public record DeleteEntityById<T>(Guid Id) : IRequest<T>, IRequest<bool> where T : class, IBaseEntity;
+public record DeleteEntityById<T>(Guid Id) : IRequest<bool> where T : class, IBaseEntity;
 
 public class DeleteEntityByIdHandler<T> : IRequestHandler<DeleteEntityById<T>, bool> where T : class, IBaseEntity
 {
