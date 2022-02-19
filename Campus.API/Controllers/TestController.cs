@@ -20,6 +20,6 @@ public class TestController : ControllerBase
     [HttpGet(Name = "test")]
     public async Task<IActionResult> Get()
     {
-        return Ok(await mediator.Send(new GetEntityById<User>(Guid.Parse("7935d8d8-e3e7-48ec-b4e0-fd5caad63669"))));
+        return Ok(await mediator.Send(new GetAllEntities<User>()));
     }
 }
