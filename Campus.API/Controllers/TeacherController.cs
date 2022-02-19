@@ -27,21 +27,15 @@ public class TeacherInfoController : ControllerBase
         return Ok(await mediator.Send(new GetAllEntities<TeacherInfo>()));
     }
 
-    [HttpPost("add_info")]
-    public async Task<IActionResult> AddInfo([FromBody] TeacherInfo info)
+    [HttpPost("save_info")]
+    public async Task<IActionResult> SaveInfo(TeacherInfo info)
     {
-        return Ok(await mediator.Send(new UpsertEntity<TeacherInfo>(info)));
+        return Ok(await mediator.Send(new SaveEntity<TeacherInfo>(info)));
     }
     
     [HttpDelete("remove_info/{id}")]
     public async Task<IActionResult> RemoveInfo(Guid id)
     {
         return Ok(await mediator.Send(new DeleteEntityById<TeacherInfo>(id)));
-    }
-    
-    [HttpPut("update_info")]
-    public async Task<IActionResult> UpdateInfo([FromBody] TeacherInfo info)
-    {
-        return Ok(await mediator.Send(new UpdateEntity<TeacherInfo>(info)));
     }
 }

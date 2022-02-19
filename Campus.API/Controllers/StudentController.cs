@@ -1,5 +1,6 @@
 using Campus.Db.Entities;
 using Campus.Model.Handlers;
+using Campus.Model.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Campus.API.Controllers;
@@ -27,21 +28,16 @@ public class StudentInfoController : ControllerBase
         return Ok(await mediator.Send(new GetAllEntities<StudentInfo>()));
     }
 
-    [HttpPost("add_info")]
-    public async Task<IActionResult> AddInfo([FromBody] StudentInfo info)
+    [HttpPost("save_info")]
+    public async Task<IActionResult> SaveInfo(StudentInfo info)
     {
-        return Ok(await mediator.Send(new UpsertEntity<StudentInfo>(info)));
+        var studentInfo = new StudentInfo();
+        return Ok(await mediator.Send(new SaveEntity<StudentInfo>(info)));
     }
     
     [HttpDelete("remove_info/{id}")]
     public async Task<IActionResult> RemoveInfo(Guid id)
     {
         return Ok(await mediator.Send(new DeleteEntityById<StudentInfo>(id)));
-    }
-    
-    [HttpPut("update_info")]
-    public async Task<IActionResult> UpdateInfo([FromBody] StudentInfo info)
-    {
-        return Ok(await mediator.Send(new UpdateEntity<StudentInfo>(info)));
     }
 }

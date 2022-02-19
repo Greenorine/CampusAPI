@@ -27,21 +27,15 @@ public class ActivityController : ControllerBase
         return Ok(await mediator.Send(new GetAllEntities<Activity>()));
     }
 
-    [HttpPost("add_activity")]
-    public async Task<IActionResult> AddActivity([FromBody] Activity activity)
+    [HttpPost("save_activity")]
+    public async Task<IActionResult> SaveActivity(Activity activity)
     {
-        return Ok(await mediator.Send(new UpsertEntity<Activity>(activity)));
+        return Ok(await mediator.Send(new SaveEntity<Activity>(activity)));
     }
     
     [HttpDelete("remove_activity/{id}")]
     public async Task<IActionResult> RemoveActivity(Guid id)
     {
         return Ok(await mediator.Send(new DeleteEntityById<Activity>(id)));
-    }
-    
-    [HttpPut("update_activity")]
-    public async Task<IActionResult> UpdateActivity([FromBody] Activity activity)
-    {
-        return Ok(await mediator.Send(new UpdateEntity<Activity>(activity)));
     }
 }

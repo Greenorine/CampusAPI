@@ -2,19 +2,19 @@ namespace Campus.Db.Interfaces;
 
 public interface IBaseEntity
 {
-    Guid Id { get; set; }
+    Guid? Id { get; set; }
 }
 
 public interface ITimedEntity: IBaseEntity
 {
-    DateTime CreatedOn { get; set; }
-    DateTime ModifiedOn { get; set; }
+    DateTime? CreatedOn { get; set; }
+    DateTime? ModifiedOn { get; set; }
 }
 
 public interface IAuditedEntity : ITimedEntity
 {
-    string CreatedBy { get; set; }
-    string ModifiedBy { get; set; }
+    string? CreatedBy { get; set; }
+    string? ModifiedBy { get; set; }
 }
 
 public interface IHistoricalEntity

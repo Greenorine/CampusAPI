@@ -10,8 +10,7 @@ public static class BuilderExtensions
             builder.RegisterGeneric(typeof(GetAllEntitiesHandler<>)).As(typeof(IRequestHandler<,>));
             builder.RegisterGeneric(typeof(GetEntityByIdHandler<>)).As(typeof(IRequestHandler<,>));
             builder.RegisterGeneric(typeof(GetEntityByQueryHandler<>)).As(typeof(IRequestHandler<,>));
-            builder.RegisterGeneric(typeof(UpdateEntityHandler<>)).As(typeof(IRequestHandler<,>));
-            builder.RegisterGeneric(typeof(UpsertEntityHandler<>)).As(typeof(IRequestHandler<,>));
+            builder.RegisterGeneric(typeof(SaveEntityHandler<>)).As(typeof(IRequestHandler<,>));
         }));
     }
 }

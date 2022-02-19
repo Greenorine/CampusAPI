@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Campus.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220219150910_Initial")]
+    [Migration("20220219182012_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,25 +26,23 @@ namespace Campus.API.Migrations
 
             modelBuilder.Entity("Campus.Db.Entities.AcademicGroup", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
                     b.Property<string>("ModifiedBy")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
@@ -54,15 +52,14 @@ namespace Campus.API.Migrations
 
             modelBuilder.Entity("Campus.Db.Entities.Activity", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<TimeSpan>("Duration")
@@ -72,10 +69,9 @@ namespace Campus.API.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("ModifiedBy")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("StartsAt")
@@ -93,7 +89,7 @@ namespace Campus.API.Migrations
 
             modelBuilder.Entity("Campus.Db.Entities.StudentInfo", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
@@ -101,20 +97,18 @@ namespace Campus.API.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
                     b.Property<string>("ModifiedBy")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<Guid>("UserId")
@@ -131,40 +125,44 @@ namespace Campus.API.Migrations
 
             modelBuilder.Entity("Campus.Db.Entities.TeacherInfo", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
                     b.Property<string>("ModifiedBy")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("WorkGroupId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
+                    b.HasIndex("WorkGroupId")
+                        .IsUnique();
+
                     b.ToTable("TeacherInfo");
                 });
 
             modelBuilder.Entity("Campus.Db.Entities.User", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
@@ -187,33 +185,29 @@ namespace Campus.API.Migrations
 
             modelBuilder.Entity("Campus.Db.Entities.WorkGroup", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
                     b.Property<string>("ModifiedBy")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<Guid>("TeacherId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TeacherId");
 
                     b.ToTable("WorkGroup");
                 });
@@ -247,7 +241,7 @@ namespace Campus.API.Migrations
             modelBuilder.Entity("Campus.Db.Entities.StudentInfo", b =>
                 {
                     b.HasOne("Campus.Db.Entities.AcademicGroup", "AcademicGroup")
-                        .WithMany("Students")
+                        .WithMany()
                         .HasForeignKey("AcademicGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -271,18 +265,15 @@ namespace Campus.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Campus.Db.Entities.WorkGroup", b =>
-                {
-                    b.HasOne("Campus.Db.Entities.TeacherInfo", "Teacher")
-                        .WithMany("WorkGroups")
-                        .HasForeignKey("TeacherId")
+                    b.HasOne("Campus.Db.Entities.WorkGroup", "WorkGroup")
+                        .WithOne("Teacher")
+                        .HasForeignKey("Campus.Db.Entities.TeacherInfo", "WorkGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Teacher");
+                    b.Navigation("User");
+
+                    b.Navigation("WorkGroup");
                 });
 
             modelBuilder.Entity("StudentInfoWorkGroup", b =>
@@ -300,14 +291,10 @@ namespace Campus.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Campus.Db.Entities.AcademicGroup", b =>
+            modelBuilder.Entity("Campus.Db.Entities.WorkGroup", b =>
                 {
-                    b.Navigation("Students");
-                });
-
-            modelBuilder.Entity("Campus.Db.Entities.TeacherInfo", b =>
-                {
-                    b.Navigation("WorkGroups");
+                    b.Navigation("Teacher")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

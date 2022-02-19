@@ -18,6 +18,6 @@ public class GetAllEntitiesHandler<T> : IRequestHandler<GetAllEntities<T>, List<
     
     public async Task<List<T>> Handle(GetAllEntities<T> request, CancellationToken cancellationToken)
     {
-        return await context.Set<T>().AsNoTracking().ToListAsync(cancellationToken);
+        return await context.Set<T>().ToListAsync(cancellationToken);
     }
 }

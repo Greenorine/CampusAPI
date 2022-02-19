@@ -21,25 +21,36 @@ public class AppDbContext : DbContext
     {
         var entries = ChangeTracker
             .Entries()
-            .Where(e => e.Entity is IEntity && e.State is EntityState.Added or EntityState.Modified);
+            .Where(e => e.Entity is IEntity &&
+                        e.State is EntityState.Added or EntityState.Modified or EntityState.Deleted);
 
         foreach (var entityEntry in entries)
         {
-            var entity = (IEntity)entityEntry.Entity;
-            if (entityEntry.State == EntityState.Added)
+            var entity = (IEntity) entityEntry.Entity;
+            switch (entityEntry.State)
             {
-                entity.CreatedOn = DateTime.UtcNow;
-                entity.CreatedBy = httpContextAccessor?.HttpContext?.User.Identity?.Name ?? "Admin";
-            }
-            else
-            {
-                Entry(entity).Property(p => p.CreatedOn).IsModified = false;
-                Entry(entity).Property(p => p.CreatedBy).IsModified = false;
+                case EntityState.Added:
+                    entity.CreatedOn = DateTime.UtcNow;
+                    entity.CreatedBy = httpContextAccessor?.HttpContext?.User.Identity?.Name ?? "Admin";
+                    break;
+                case EntityState.Modified:
+                    Entry(entity).Property(nameof(IEntity.CreatedOn)).IsModified = false;
+                    Entry(entity).Property(nameof(IEntity.CreatedBy)).IsModified = false;
+                    break;
+                case EntityState.Deleted:
+                    entity.IsDeleted = true;
+                    entityEntry.State = EntityState.Modified;
+                    break;
+                case EntityState.Detached:
+                    break;
+                case EntityState.Unchanged:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             entity.ModifiedOn = DateTime.UtcNow;
-            entity.ModifiedBy =
-                httpContextAccessor?.HttpContext?.User.Identity?.Name ?? "Admin";
+            entity.ModifiedBy = httpContextAccessor?.HttpContext?.User.Identity?.Name ?? "Admin";
         }
 
         return await base.SaveChangesAsync(cancellationToken);

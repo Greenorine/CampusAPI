@@ -27,21 +27,15 @@ public class UserController : ControllerBase
         return Ok(await mediator.Send(new GetAllEntities<User>()));
     }
 
-    [HttpPost("add_user")]
-    public async Task<IActionResult> AddUser([FromBody] User user)
+    [HttpPost("save_user")]
+    public async Task<IActionResult> SaveUser(User user)
     {
-        return Ok(await mediator.Send(new UpsertEntity<User>(user)));
+        return Ok(await mediator.Send(new SaveEntity<User>(user)));
     }
     
     [HttpDelete("remove_user/{id}")]
     public async Task<IActionResult> RemoveUser(Guid id)
     {
         return Ok(await mediator.Send(new DeleteEntityById<User>(id)));
-    }
-    
-    [HttpPut("update_user")]
-    public async Task<IActionResult> UpdateUser([FromBody] User user)
-    {
-        return Ok(await mediator.Send(new UpdateEntity<User>(user)));
     }
 }

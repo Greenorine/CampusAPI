@@ -1,6 +1,7 @@
 using Campus.Db;
 using Campus.Db.Interfaces;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Campus.Model.Handlers;
 
@@ -17,6 +18,7 @@ public class GetEntityByIdHandler<T> : IRequestHandler<GetEntityById<T>, T> wher
 
     public async Task<T> Handle(GetEntityById<T> request, CancellationToken cancellationToken)
     {
-        return await context.FindAsync<T>(new object[] {request.Id}, cancellationToken: cancellationToken);
+        return await context.Set<T>()
+            .FirstOrDefaultAsync(e => e.Id == request.Id, cancellationToken);
     }
 }

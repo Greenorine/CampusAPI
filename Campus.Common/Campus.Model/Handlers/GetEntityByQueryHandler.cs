@@ -19,6 +19,6 @@ public class GetEntityByQueryHandler<T> : IRequestHandler<GetEntityByQuery<T>, T
     
     public async Task<T> Handle(GetEntityByQuery<T> request, CancellationToken cancellationToken)
     {
-        return await context.Set<T>().AsNoTracking().Where(request.Query).FirstOrDefaultAsync(cancellationToken);
+        return await context.Set<T>().FirstOrDefaultAsync(request.Query, cancellationToken);
     }
 }

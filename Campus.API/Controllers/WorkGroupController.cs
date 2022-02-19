@@ -16,7 +16,7 @@ public class WorkGroupController : ControllerBase
     }
 
     [HttpGet("get_group/{id}")]
-    public async Task<IActionResult> Getgroup(Guid id)
+    public async Task<IActionResult> GetGroup(Guid id)
     {
         return Ok(await mediator.Send(new GetEntityById<WorkGroup>(id)));
     }
@@ -27,21 +27,15 @@ public class WorkGroupController : ControllerBase
         return Ok(await mediator.Send(new GetAllEntities<WorkGroup>()));
     }
 
-    [HttpPost("add_group")]
-    public async Task<IActionResult> Addgroup([FromBody] WorkGroup group)
+    [HttpPost("save_group")]
+    public async Task<IActionResult> SaveGroup(WorkGroup group)
     {
-        return Ok(await mediator.Send(new UpsertEntity<WorkGroup>(group)));
+        return Ok(await mediator.Send(new SaveEntity<WorkGroup>(group)));
     }
 
     [HttpDelete("remove_group/{id}")]
-    public async Task<IActionResult> Removegroup(Guid id)
+    public async Task<IActionResult> RemoveGroup(Guid id)
     {
         return Ok(await mediator.Send(new DeleteEntityById<WorkGroup>(id)));
-    }
-
-    [HttpPut("update_group")]
-    public async Task<IActionResult> Updategroup([FromBody] WorkGroup group)
-    {
-        return Ok(await mediator.Send(new UpdateEntity<WorkGroup>(group)));
     }
 }
