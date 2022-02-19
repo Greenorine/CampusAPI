@@ -8,3 +8,4 @@ global using Campus.Db;
 global using Campus.Model.Handlers;
 global using Campus.Model.Utils;
 global using Microsoft.EntityFrameworkCore;
+global using Campus.API.Utils;
