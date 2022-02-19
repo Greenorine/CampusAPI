@@ -25,7 +25,7 @@ public class AppDbContext : DbContext
 
         foreach (var entityEntry in entries)
         {
-            var entity = (IEntity) entityEntry.Entity;
+            var entity = (IEntity)entityEntry.Entity;
             if (entityEntry.State == EntityState.Added)
             {
                 entity.CreatedOn = DateTime.UtcNow;
@@ -45,5 +45,7 @@ public class AppDbContext : DbContext
         return await base.SaveChangesAsync(cancellationToken);
     }
 
-    public DbSet<User> Clients { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<User> StudentInfo { get; set; }
+    public DbSet<User> TeacherInfo { get; set; }
 }
