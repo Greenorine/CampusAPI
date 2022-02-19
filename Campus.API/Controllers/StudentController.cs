@@ -1,6 +1,4 @@
 using Campus.Db.Entities;
-using Campus.Model.Handlers;
-using Campus.Model.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Campus.API.Controllers;
